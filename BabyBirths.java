@@ -8,10 +8,15 @@ public class BabyBirths {
         FileResource fr = new FileResource ();
 
         for (CSVRecord record: fr.getCSVParser (false)) {
-            System.out.println ("Name:"+ record.get (0)+
-                    " Gender: "+record.get (1)+
-                    " Num Born: "+ record.get (2)
-                    );
+
+            int numberOfBabies= Integer.parseInt (record.get (2));
+            if (numberOfBabies>=100){
+                System.out.println ("Name:"+ record.get (0)+
+                        " Gender: "+record.get (1)+
+                        " Num Born: "+ numberOfBabies
+                );
+            }
+
         }
     }
 }
