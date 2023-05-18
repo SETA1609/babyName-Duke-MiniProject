@@ -93,7 +93,7 @@ public class BabyBirths {
 
 
     /**
-     * TODO
+     * DONE
      * Write the method named getRank that has three parameters: an integer named year, a string named name,
      * and a string named gender (F for female and M for male).
      * This method returns the rank of the name in the file for the given gender,
@@ -116,6 +116,7 @@ public class BabyBirths {
     }
 
     /**
+     * DONE
      * Write the method named getName that has three parameters:
      * an integer named year, an integer named rank, and a string named gender (F for female and M for male).
      * This method returns the name of the person in the file at this rank, for the given gender,
@@ -142,7 +143,30 @@ public class BabyBirths {
 
     }
 
+    /**
+     * What would your name be if you were born in a different year?
+     * Write the void method named whatIsNameInYear that has four parameters: a string name,
+     * an integer named year representing the year that name was born,
+     * an integer named newYear and a string named gender (F for female and M for male).
+     * This method determines what name would have been named if they were born in a different year, based on the same popularity.
+     * That is, you should determine the rank of name in the year they were born,
+     * and then print the name born in newYear that is at the same rank and same gender. For example,
+     * using the files "yob2012short.csv" and "yob2014short.csv",
+     * notice that in 2012 Isabella is the third most popular girl's name.
+     * If Isabella was born in 2014 instead, she would have been named Sophia,
+     * the third most popular girl's name that year. The output might look like this:
+     * Isabella born in 2012 would be Sophia if she was born in 2014.
+     * */
 
+    public void whatIsNameInYear(String name, int year,int newYear,String gender){
+
+        int ranking= getRank (year, name, gender);
+        String newName= getName (newYear,ranking,gender);
+
+        System.out.println (name+" born in "+year+" would be "+newName+" if she was born in "+newYear);
+
+
+    }
 
 
 }
