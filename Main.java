@@ -6,7 +6,9 @@ public class Main {
         BabyBirths babyBirths= new BabyBirths ();
 
        // babyBirths.printNames ();
-        babyBirths.testTotalBirths ();
+       // babyBirths.testTotalBirths ();
+        System.out.println (babyBirths.getRank (1880,"Lula","F"));
+
 
     }
 }
