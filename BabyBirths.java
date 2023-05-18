@@ -1,5 +1,4 @@
-import edu.duke.DirectoryResource;
-import edu.duke.FileResource;
+import edu.duke.*;
 import org.apache.commons.csv.*;
 
 import java.io.File;
@@ -248,6 +247,37 @@ public class BabyBirths {
         average= (double) total /counter;
 
         return average;
+    }
+
+
+    /**
+     * Write the method getTotalBirthsRankedHigher that has three parameters: an integer named year,
+     * a string named name, and a string named gender (F for female and M for male).
+     * This method returns an integer, the total number of births of those names with
+     * the same gender and same year who are ranked higher than name. For example,
+     * if getTotalBirthsRankedHigher accesses the "yob2012short.csv" file with name set to “Ethan”,
+     * gender set to “M”, and year set to 2012,
+     * then this method should return 15, since Jacob has 8 births and Mason has 7 births,
+     * and those are the only two ranked higher than Ethan.
+     * */
+
+    public int getTotalBirthsRankedHigher(int year, String name, String gender ){
+
+        FileResource fr = new FileResource ("C:\\Users\\SebastianTamayoPache\\Desktop\\selbsstudy\\BabyName\\us_babynames (1)\\us_babynames_by_year\\yob" + year + ".csv");
+        int rank=getRank (year, name, gender);
+        int total=0;
+        CSVParser parser=fr.getCSVParser ();
+
+        for (CSVRecord current:parser) {
+            int tmpRanking=getRank (year, current.get (0), gender);
+            if (tmpRanking>rank){
+                int numberOfBirths= Integer.parseInt (current.get (2));
+                total+=numberOfBirths;
+            }
+
+        }
+
+        return total;
     }
 
 }
