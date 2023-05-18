@@ -1,6 +1,8 @@
+import edu.duke.DirectoryResource;
 import edu.duke.FileResource;
 import org.apache.commons.csv.*;
 
+import java.io.File;
 import java.util.*;
 
 
@@ -165,6 +167,43 @@ public class BabyBirths {
 
         System.out.println (name+" born in "+year+" would be "+newName+" if she was born in "+newYear);
 
+
+    }
+
+    /**
+     * Write the method yearOfHighestRank that has two parameters: a string name, and a string named gender (F for female and M for male).
+     * This method selects a range of files to process and returns an integer, the year with the highest rank for the name and gender.
+     * If the name and gender are not in any of the selected files, it should return -1.
+     * For example, calling yearOfHighestRank with name Mason and gender ‘M’ and selecting the three test files above results in returning the year 2012.
+     * That is because Mason was ranked the  2nd most popular name in 2012, ranked 4th in 2013 and ranked 3rd in 2014. His highest ranking was in 2012.
+     * */
+
+    public int yearOfHighestRank( String name, String gender){
+
+        DirectoryResource dr = new DirectoryResource ();
+
+        int year = 0;
+        int highestRanking = 0;
+
+        for (File f : dr.selectedFiles()) {
+
+            String stringYear = f.getName();
+            int startIndex = stringYear.indexOf("yob") + 3;
+            int endIndex = stringYear.indexOf(".csv");
+            stringYear = stringYear.substring(startIndex, endIndex);
+            int currentYear = Integer.parseInt(stringYear);
+            int currentRanking = getRank(currentYear, name, gender);
+            if(highestRanking==0){
+                highestRanking=currentRanking;
+            }
+            if (highestRanking > currentRanking) {
+                highestRanking = currentRanking;
+                year = currentYear;
+            }
+
+        }
+
+        return year;
 
     }
 
