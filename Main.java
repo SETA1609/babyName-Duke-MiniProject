@@ -8,7 +8,7 @@ public class Main {
        // babyBirths.printNames ();
        // babyBirths.testTotalBirths ();
         System.out.println (babyBirths.getRank (1880,"Lula","F"));
-
+        System.out.println (babyBirths.getName (1880,904,"F"));
 
     }
 }
