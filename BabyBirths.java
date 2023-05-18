@@ -19,4 +19,29 @@ public class BabyBirths {
 
         }
     }
+
+    public void totalBirth(FileResource fr){
+
+        int total=0;
+
+        for (CSVRecord record: fr.getCSVParser (false)) {
+
+            int numberOfBabies= Integer.parseInt (record.get (2));
+
+            total+=numberOfBabies;
+
+        }
+
+        System.out.println ("Total babies born: "+total);
+
+    }
+
+    public void testTotalBirths(){
+
+        FileResource fr = new FileResource ();
+
+        totalBirth (fr);
+
+    }
+
 }

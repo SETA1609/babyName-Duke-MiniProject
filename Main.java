@@ -5,8 +5,8 @@ public class Main {
 
         BabyBirths babyBirths= new BabyBirths ();
 
-        babyBirths.printNames ();
-
+       // babyBirths.printNames ();
+        babyBirths.testTotalBirths ();
 
     }
 }
