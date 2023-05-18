@@ -63,7 +63,7 @@ public class BabyBirths {
     }
 
 
-    public HashMap<String, Integer> genderListRanking (FileResource fr, String gender){
+    public HashMap<String, Integer> genderListRanking(FileResource fr, String gender) {
 
         int rank = 1;
 
@@ -85,7 +85,7 @@ public class BabyBirths {
         babyRanking.sort (birthComparator);
         HashMap<String, Integer> babyRecord = new HashMap<> ();
 
-        for (Baby baby:babyRanking) {
+        for (Baby baby : babyRanking) {
             babyRecord.put (baby.name, rank);
             rank++;
         }
@@ -110,7 +110,7 @@ public class BabyBirths {
 
         FileResource fr = new FileResource ("C:\\Users\\SebastianTamayoPache\\Desktop\\selbsstudy\\BabyName\\us_babynames (1)\\us_babynames_by_year\\yob" + year + ".csv");
 
-        HashMap<String, Integer> babyRecord = genderListRanking (fr,gender);
+        HashMap<String, Integer> babyRecord = genderListRanking (fr, gender);
 
 
         return babyRecord.getOrDefault (name, -1);
@@ -124,18 +124,18 @@ public class BabyBirths {
      * This method returns the name of the person in the file at this rank, for the given gender,
      * where rank 1 is the name with the largest number of births.
      * If the rank does not exist in the file, then “NO NAME”  is returned.
-     * */
+     */
 
-    public String getName(int year, int ranking,String gender){
+    public String getName(int year, int ranking, String gender) {
 
         FileResource fr = new FileResource ("C:\\Users\\SebastianTamayoPache\\Desktop\\selbsstudy\\BabyName\\us_babynames (1)\\us_babynames_by_year\\yob" + year + ".csv");
 
-        HashMap<String, Integer> babyRecord = genderListRanking (fr,gender);
-        String name= "No name";
-        if (babyRecord.containsValue (ranking)){
-            for (Map.Entry<String,Integer> entry:babyRecord.entrySet ()) {
-                if (entry.getValue ()==ranking){
-                     name=entry.getKey ();
+        HashMap<String, Integer> babyRecord = genderListRanking (fr, gender);
+        String name = "No name";
+        if (babyRecord.containsValue (ranking)) {
+            for (Map.Entry<String, Integer> entry : babyRecord.entrySet ()) {
+                if (entry.getValue () == ranking) {
+                    name = entry.getKey ();
                     return name;
                 }
             }
@@ -158,14 +158,14 @@ public class BabyBirths {
      * If Isabella was born in 2014 instead, she would have been named Sophia,
      * the third most popular girl's name that year. The output might look like this:
      * Isabella born in 2012 would be Sophia if she was born in 2014.
-     * */
+     */
 
-    public void whatIsNameInYear(String name, int year,int newYear,String gender){
+    public void whatIsNameInYear(String name, int year, int newYear, String gender) {
 
-        int ranking= getRank (year, name, gender);
-        String newName= getName (newYear,ranking,gender);
+        int ranking = getRank (year, name, gender);
+        String newName = getName (newYear, ranking, gender);
 
-        System.out.println (name+" born in "+year+" would be "+newName+" if she was born in "+newYear);
+        System.out.println (name + " born in " + year + " would be " + newName + " if she was born in " + newYear);
 
 
     }
@@ -176,25 +176,28 @@ public class BabyBirths {
      * If the name and gender are not in any of the selected files, it should return -1.
      * For example, calling yearOfHighestRank with name Mason and gender ‘M’ and selecting the three test files above results in returning the year 2012.
      * That is because Mason was ranked the  2nd most popular name in 2012, ranked 4th in 2013 and ranked 3rd in 2014. His highest ranking was in 2012.
-     * */
+     */
 
-    public int yearOfHighestRank( String name, String gender){
+    public int yearOfHighestRank(String name, String gender) {
 
         DirectoryResource dr = new DirectoryResource ();
 
         int year = 0;
         int highestRanking = 0;
 
-        for (File f : dr.selectedFiles()) {
+        for (File f : dr.selectedFiles ()) {
 
-            String stringYear = f.getName();
-            int startIndex = stringYear.indexOf("yob") + 3;
-            int endIndex = stringYear.indexOf(".csv");
-            stringYear = stringYear.substring(startIndex, endIndex);
-            int currentYear = Integer.parseInt(stringYear);
-            int currentRanking = getRank(currentYear, name, gender);
-            if(highestRanking==0){
-                highestRanking=currentRanking;
+            String stringYear = f.getName ();
+            int startIndex = stringYear.indexOf ("yob") + 3;
+            int endIndex = stringYear.indexOf (".csv");
+            stringYear = stringYear.substring (startIndex, endIndex);
+            int currentYear = Integer.parseInt (stringYear);
+            int currentRanking = getRank (currentYear, name, gender);
+            if (highestRanking == 0) {
+                highestRanking = currentRanking;
+            }
+            if (highestRanking == -1) {
+                return -1;
             }
             if (highestRanking > currentRanking) {
                 highestRanking = currentRanking;
@@ -207,5 +210,44 @@ public class BabyBirths {
 
     }
 
+    /**
+     * Write the method getAverageRank that has two parameters: a string name,
+     * and a string named gender (F for female and M for male).
+     * This method selects a range of files to process and returns a double representing the average rank of the name and
+     * gender over the selected files. It should return -1.0 if the name is not ranked in any of the selected files.
+     * For example calling getAverageRank with name Mason and gender ‘M’ and selecting the three test files
+     * above results in returning 3.0, as he is rank 2 in the year 2012, rank 4 in 2013 and rank 3 in 2014.
+     * As another example,
+     * calling   getAverageRank with name Jacob and gender ‘M’ and selecting the three test files above results in returning 2.66.
+     */
+
+    public double getAverageRank(String name, String gender) {
+
+        DirectoryResource dr = new DirectoryResource ();
+        double average=0.0;
+        int counter=0;
+        int total=0;
+
+        for (File f : dr.selectedFiles ()) {
+
+            String stringYear = f.getName ();
+            int startIndex = stringYear.indexOf ("yob") + 3;
+            int endIndex = stringYear.indexOf (".csv");
+            stringYear = stringYear.substring (startIndex, endIndex);
+            int currentYear = Integer.parseInt (stringYear);
+            int currentRanking = getRank (currentYear, name, gender);
+            if (currentRanking == -1) {
+                return -1.0;
+            }else {
+                counter++;
+                total+=currentRanking;
+            }
+
+        }
+
+        average= (double) total /counter;
+
+        return average;
+    }
 
 }

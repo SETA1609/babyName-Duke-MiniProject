@@ -13,7 +13,9 @@ public class Main {
         System.out.println (babyBirths.getRank (1882,"Lula","F"));
         System.out.println (babyBirths.getName (1880,904,"F"));
         babyBirths.whatIsNameInYear ("Lula",1880,2000,"F");
-        System.out.println (babyBirths.yearOfHighestRank ("Lula","F"));
+        //System.out.println (babyBirths.yearOfHighestRank ("Lula","F"));
+        System.out.println (babyBirths.getAverageRank ("Lula","F"));
+
 
     }
 }
