@@ -23,6 +23,8 @@ public class BabyBirths {
     public void totalBirth(FileResource fr){
 
         int total=0;
+        int totalM=0;
+        int totalF=0;
 
         for (CSVRecord record: fr.getCSVParser (false)) {
 
@@ -30,9 +32,16 @@ public class BabyBirths {
 
             total+=numberOfBabies;
 
+            if (record.get (1).equals ("M")){
+                totalM+=numberOfBabies;
+            }else {
+                totalF+=numberOfBabies;
+            }
         }
 
         System.out.println ("Total babies born: "+total);
+        System.out.println ("Total boys: "+totalM);
+        System.out.println ("Total girls: "+totalF);
 
     }
 
